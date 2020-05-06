@@ -5,9 +5,9 @@ import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.juyao.jmvvm.adapter.SimpleRecAdapter
-import com.juyao.jmvvm.ext.load
 import com.juyao.jmvvmdemo.R
 import com.juyao.jmvvmdemo.bean.Banner
+import com.juyao.jmvvmdemo.ext.load
 import kotlinx.android.synthetic.main.listitem_banner.view.*
 
 class BannerAdapter(context:Context): SimpleRecAdapter<Banner, BannerViewHolder>(context) {

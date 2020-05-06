@@ -1,9 +1,6 @@
 package com.juyao.jmvvm.ext
 
 import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-
 
 
 var start=0L
@@ -17,6 +14,3 @@ fun View.setOnSafeClickLitener(action:()->Unit){
     }
 }
 
-fun ImageView.load(url:String){
-    Glide.with(context).load(url).into(this)
-}
