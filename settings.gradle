@@ -1,0 +1,3 @@
+rootProject.name='JMVVMDemo'
+include ':app'
+include ':jmvvm'
