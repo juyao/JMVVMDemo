@@ -10,29 +10,21 @@ import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
 abstract class JFragment<VM: ViewModel>: Fragment(), IView<VM> {
-    val binding: ViewBinding? by lazy {
-        getViewBinding()
-    }
     val viewModel:VM by lazy {
         getViewModel()
     }
     val context:FragmentActivity? by lazy {
         activity
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding?.root
-    }
-
     override fun getOptionsMenuId(): Int =0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData(savedInstanceState)
+    }
+
+    override fun getViewBinding(): ViewBinding? {
+        return null
     }
 
 

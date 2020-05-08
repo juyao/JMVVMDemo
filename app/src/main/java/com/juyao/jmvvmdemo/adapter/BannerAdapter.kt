@@ -17,6 +17,7 @@ class BannerAdapter(context:Context): SimpleRecAdapter<Banner, BannerViewHolder>
     override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
         val banner=dataList[position]
         (holder.itemView.img_banner as ImageView).load(banner.image)
+        holder.itemView.text_title.text=banner.title
     }
 
     override fun getLayoutId(): Int = R.layout.listitem_banner
