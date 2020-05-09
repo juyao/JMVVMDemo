@@ -16,6 +16,9 @@ abstract class JActivity<VM:ViewModel?>: FragmentActivity(), IView<VM> {
     val binding:ViewBinding? by lazy {
         getViewBinding()
     }
+    val TAG by lazy {
+        localClassName
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding?.let {

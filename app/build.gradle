@@ -60,4 +60,7 @@ dependencies {
     implementation project(path: ':jmvvm')
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation 'com.github.yyued:SVGAPlayer-Android:2.5.3'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
+    implementation 'com.tencent.tbs.tbssdk:sdk:43903'
 }

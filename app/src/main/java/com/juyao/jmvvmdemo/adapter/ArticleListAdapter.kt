@@ -27,6 +27,9 @@ class ArticleListAdapter(context:Context) : SimpleRecAdapter<Article, ArticleVie
             }
             text_title.text=article.title
             text_dec.text=article.desc
+            setOnClickListener {
+                recItemClick?.onItemClick(position,article,0,holder)
+            }
         }
 
 

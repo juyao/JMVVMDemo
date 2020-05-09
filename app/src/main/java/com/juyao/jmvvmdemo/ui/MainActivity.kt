@@ -1,5 +1,6 @@
 package com.juyao.jmvvmdemo.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.juyao.jmvvm.adapter.RecyclerItemCallback
 import com.juyao.jmvvm.mvvm.JActivity
 import com.juyao.jmvvmdemo.adapter.BannerAdapter
+import com.juyao.jmvvmdemo.adapter.BannerViewHolder
 import com.juyao.jmvvmdemo.adapter.MainPagerAdapter
 import com.juyao.jmvvmdemo.bean.Banner
 import com.juyao.jmvvmdemo.bean.Categories
@@ -83,6 +86,28 @@ class MainActivity : JActivity<MainViewModel>() {
                 }
                 (binding as ActivityMainBinding).banner.adapter=bannerAdapter
                 bannerAdapter!!.setData(it)
+                bannerAdapter!!.recItemClick=object:RecyclerItemCallback<Banner,BannerViewHolder>{
+                    override fun onItemClick(
+                        position: Int,
+                        model: Banner,
+                        tag: Int,
+                        holder: BannerViewHolder
+                    ) {
+                        val intent=Intent(context,WebViewActivity::class.java)
+                        intent.putExtra("url",model.url)
+                        startActivity(intent)
+                    }
+
+                    override fun onItemLongClick(
+                        position: Int,
+                        model: Banner,
+                        tag: Int,
+                        holder: BannerViewHolder
+                    ) {
+
+                    }
+
+                }
                 (binding as ActivityMainBinding).banner.setCurrentItem(1,false)
             })
         viewModel.getCategories()
@@ -97,6 +122,7 @@ class MainActivity : JActivity<MainViewModel>() {
             tab.text=it[position].title
         }.attach()
         })
+
 
 
         
