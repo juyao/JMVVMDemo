@@ -25,7 +25,7 @@ class ArticleListAdapter(context:Context) : SimpleRecAdapter<Article, ArticleVie
             }else{
                 img_cover.setImageDrawable(ColorDrawable(context.resources.getColor(R.color.colorPrimary)))
             }
-            text_title.text="article.titleuhudhaudhauhduahdsuadhndasbcahcbhcbhbchabchbchabchsabchac"
+            text_title.text=article.title
             text_dec.text=article.desc
         }
 
