@@ -13,7 +13,7 @@ abstract class JActivity<VM:ViewModel?>: FragmentActivity(), IView<VM> {
     val context:Context by lazy {
         this
     }
-    val binding:ViewBinding? by lazy {
+    val jBinding:ViewBinding? by lazy {
         getViewBinding()
     }
     val TAG by lazy {
@@ -21,7 +21,7 @@ abstract class JActivity<VM:ViewModel?>: FragmentActivity(), IView<VM> {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding?.let {
+        jBinding?.let {
             setContentView(it.root)
         }
         initData(savedInstanceState)

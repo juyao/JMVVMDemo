@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,10 +18,10 @@ import com.juyao.jmvvmdemo.adapter.MainPagerAdapter
 import com.juyao.jmvvmdemo.bean.Banner
 import com.juyao.jmvvmdemo.bean.Categories
 import com.juyao.jmvvmdemo.databinding.ActivityMainBinding
-import com.juyao.jmvvmdemo.ext.dpToPx
 import com.juyao.jmvvmdemo.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,6 +31,15 @@ import kotlin.math.abs
 class MainActivity : JActivity<MainViewModel>() {
     var bannerAdapter:BannerAdapter?=null
     val maxRito=0.8f
+    val tickChannel by lazy {
+        ticker(3000,3000)
+    }
+    val mainPagerAdapter by lazy {
+        MainPagerAdapter(context as MainActivity)
+    }
+    val binding by lazy { 
+        jBinding as ActivityMainBinding
+    }
     override fun initData(savedInstanceState: Bundle?) {
         toolbar.title="干货集中营"
         toolbar.setTitleTextColor(Color.WHITE)
@@ -50,7 +58,7 @@ class MainActivity : JActivity<MainViewModel>() {
                 1-absPos
             }
         }
-        (binding as ActivityMainBinding).banner.apply {
+        binding.banner.apply {
             offscreenPageLimit=1
             setPageTransformer(mAnimator)
             registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
@@ -78,13 +86,20 @@ class MainActivity : JActivity<MainViewModel>() {
                     }
                 }
             })
+            lifecycleScope.launch(Dispatchers.Main){
+                for(event in tickChannel){
+                    binding.banner.currentItem= binding.banner.currentItem+1
+                }
+            }
+
         }
+
         viewModel.bannerData.observe(this,
             Observer<List<Banner>> {
                 if(null==bannerAdapter){
                     bannerAdapter= BannerAdapter(context)
                 }
-                (binding as ActivityMainBinding).banner.adapter=bannerAdapter
+                binding.banner.adapter=bannerAdapter
                 bannerAdapter!!.setData(it)
                 bannerAdapter!!.recItemClick=object:RecyclerItemCallback<Banner,BannerViewHolder>{
                     override fun onItemClick(
@@ -108,12 +123,11 @@ class MainActivity : JActivity<MainViewModel>() {
                     }
 
                 }
-                (binding as ActivityMainBinding).banner.setCurrentItem(1,false)
+                binding.banner.setCurrentItem(1,false)
             })
         viewModel.getCategories()
-        (binding as ActivityMainBinding).mainPager.offscreenPageLimit=2
+        binding.mainPager.offscreenPageLimit=2
         viewModel.categoriesData.observe(this,Observer<List<Categories>>{
-            val mainPagerAdapter=MainPagerAdapter(context as MainActivity)
             mainPagerAdapter.categoriesList=it
             main_pager.adapter=mainPagerAdapter
             tablayout.tabMode=TabLayout.MODE_AUTO
@@ -122,10 +136,14 @@ class MainActivity : JActivity<MainViewModel>() {
             tab.text=it[position].title
         }.attach()
         })
-
-
-
-        
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getBanner()
+            mainPagerAdapter.fragmentList[binding.mainPager.currentItem].refresh()
+            lifecycleScope.launch(Dispatchers.Main){
+                delay(2000)
+                binding.refreshLayout.finishRefresh()
+            }
+        }
 
     }
 
@@ -133,5 +151,6 @@ class MainActivity : JActivity<MainViewModel>() {
 
     override fun getViewModel(): MainViewModel = ViewModelProvider(this).get(
         MainViewModel::class.java)
+
 
 }

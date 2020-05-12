@@ -4,58 +4,77 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
    android:padding="10dp">
-
-    <TextView
-        android:id="@+id/text_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_createtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/text_author"
-        app:layout_constraintRight_toRightOf="parent" />
-
     <ImageView
         android:id="@+id/img_cover"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:0.5"
+        app:layout_constraintDimensionRatio="1:0.8"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_author"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+        android:id="@+id/text_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:background="@drawable/text_flag_bg"
+        app:layout_constraintTop_toTopOf="@id/img_cover"
+        app:layout_constraintLeft_toRightOf="@id/img_cover"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/text_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/black"
         android:textSize="16sp"
         android:gravity="start"
-        app:layout_constraintTop_toTopOf="@id/img_cover"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintLeft_toLeftOf="@id/img_cover"
-        app:layout_constraintRight_toRightOf="@id/img_cover"
-        app:layout_constraintBottom_toBottomOf="@id/img_cover"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintLeft_toRightOf="@id/text_flag"
+        android:layout_marginLeft="10sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_flag"
+        android:text=""/>
 
     <TextView
         android:id="@+id/text_dec"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/text_flag"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_cover" />
+        app:layout_constraintTop_toBottomOf="@id/text_flag"
+        android:layout_marginTop="10dp"
+        android:maxLines="3"
+        android:ellipsize="end"/>
+    <ImageView
+        android:id="@+id/img_head"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/head"
+        app:layout_constraintBottom_toBottomOf="@id/img_cover"
+        app:layout_constraintLeft_toLeftOf="@id/text_flag"
+        android:layout_marginBottom="2dp"/>
+    <TextView
+        android:id="@+id/text_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/img_cover"
+        app:layout_constraintLeft_toRightOf="@id/img_head"
+        android:layout_marginLeft="5dp"/>
+    <TextView
+        android:id="@+id/text_createtime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_author"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/img_cover"
+        app:layout_constraintLeft_toRightOf="@id/text_author"
+        android:gravity="right"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

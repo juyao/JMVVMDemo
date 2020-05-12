@@ -17,7 +17,7 @@ import com.tencent.smtt.sdk.WebViewClient
 
 class WebViewActivity : JActivity<WebViewViewModel>() {
     val bd by lazy {
-        binding as ActivityWebViewBinding
+        jBinding as ActivityWebViewBinding
     }
     override fun initData(savedInstanceState: Bundle?) {
         window.setFormat(PixelFormat.TRANSLUCENT)

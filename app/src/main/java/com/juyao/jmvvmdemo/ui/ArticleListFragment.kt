@@ -37,6 +37,7 @@ class ArticleListFragment : JFragment<ArticleListViewModel>{
 
 
     override fun initData(savedInstanceState: Bundle?) {
+
         val layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         binding.articleListview.layoutManager=layoutManager
         articleAdapter= context?.let { ArticleListAdapter(it) }
@@ -67,6 +68,10 @@ class ArticleListFragment : JFragment<ArticleListViewModel>{
             }})
         viewModel.getArticleList(category!!,1)
 
+
+    }
+    fun refresh(){
+        viewModel.getArticleList(category!!,1)
     }
 
     override fun getViewModel(): ArticleListViewModel=ViewModelProvider(this).get(ArticleListViewModel::class.java)
