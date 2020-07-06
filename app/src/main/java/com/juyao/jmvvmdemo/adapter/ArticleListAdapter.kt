@@ -31,6 +31,10 @@ class ArticleListAdapter(context:Context) : SimpleRecAdapter<Article, ArticleVie
             setOnClickListener {
                 recItemClick?.onItemClick(position,article,0,holder)
             }
+            setOnLongClickListener {
+                recItemClick?.onItemLongClick(position,article,0,holder)
+                true
+            }
         }
 
 

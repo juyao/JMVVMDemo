@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -63,4 +64,9 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
     implementation 'com.tencent.tbs.tbssdk:sdk:43903'
+    implementation 'androidx.room:room-runtime:2.2.5'
+    implementation 'androidx.room:room-ktx:2.2.5'
+    kapt 'android.arch.persistence.room:compiler:2.2.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
 }
